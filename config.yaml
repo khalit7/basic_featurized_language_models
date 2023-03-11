@@ -1,0 +1,9 @@
+model_name: log_linear_LM
+batch_size: 64
+epochs: 30
+learning_rate: 0.001
+
+max_seq_len : 256
+min_seq_len : 4
+min_freq : 100
+context_size : 4
