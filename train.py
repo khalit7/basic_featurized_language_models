@@ -5,6 +5,7 @@ import models
 import constants as CONSTANTS
 import helper
 from trainer import Trainer
+import torch
 
 from torch.utils.tensorboard import SummaryWriter
 
@@ -24,8 +25,7 @@ if __name__ == "__main__":
     scheduler = None
     lr = CONSTANTS.learning_rate
     optimizer = helper.get_optimizer(model,lr)
-    # device = torch.device("mps" if torch.has_mps else "cpu")
-    device = "cpu"
+    device = torch.device("mps" if torch.has_mps else "cpu")
     model_path = f"weights/{model_name}"
 
     writer = SummaryWriter(f".runs/{model_name}")
