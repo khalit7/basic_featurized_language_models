@@ -32,4 +32,31 @@ class LogLinearLM(nn.Module):
     
     
     
+class FFLM(nn.Module):
+    
+    def __init__(self,vocab_size):
+        super().__init__()
+        
+        self.embed = nn.Embedding(vocab_size,vocab_size)
+        
+        self.lin = nn.Linear(vocab_size*CONSTANTS.context_size,vocab_size)
+        
+        
+        
+    def forward(self,x):
+        '''
+        x has the shape (batch_size*context_size)
+        output has the shape batch_size*vocab_size
+        '''
+        
+        x = self.embed(x)                                           # shape is (batch_size*context_size*vocab_size)
+        b,c,v = x.shape
+        x = x.reshape(b,c*v)                                        # shape is (batch_size*context_sizeXvocab_size)
+        
+        x = self.lin(x)                                             # shape is (batch_size*vocab_size)
+        x = torch.tanh(x)                                           # shape is (batch_size*vocab_size)
+        
+        return x
+    
+    
     
