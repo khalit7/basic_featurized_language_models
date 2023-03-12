@@ -1,4 +1,4 @@
-model_name: log_linear_LM
+model_name: FFLM
 batch_size: 64
 epochs: 30
 learning_rate: 0.001
