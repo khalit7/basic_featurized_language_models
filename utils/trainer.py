@@ -45,6 +45,7 @@ class Trainer():
     def train(self):
         
         print(f"TRAINING STARTED using device = {self.device} .... training the model {self.model_name}, the training will continue for {self.number_of_epochs} epochs",end="\n \n")
+        print(f"configs: \n optimizer = {self.optimizer}, criterion = {self.criterion}",end="\n \n \n")
         for e in range(1,self.number_of_epochs+1):
             
             print(f"    epoch #{e}")
