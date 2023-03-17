@@ -37,11 +37,11 @@ class FFLM(nn.Module):
     def __init__(self,vocab_size):
         super().__init__()
         
-        self.embed = nn.Embedding(vocab_size,vocab_size)
+        self.embed = nn.Embedding(vocab_size,100)
         
-        self.lin = nn.Linear(vocab_size*CONSTANTS.context_size,vocab_size)
+        self.lin = nn.Linear(100*CONSTANTS.context_size,vocab_size)
         
-        
+        self.relu = nn.ReLU()
         
     def forward(self,x):
         '''
@@ -54,7 +54,7 @@ class FFLM(nn.Module):
         x = x.reshape(b,c*v)                                        # shape is (batch_size*context_sizeXvocab_size)
         
         x = self.lin(x)                                             # shape is (batch_size*vocab_size)
-        x = torch.tanh(x)                                           # shape is (batch_size*vocab_size)
+        x = self.relu(x)                                           # shape is (batch_size*vocab_size)
         
         return x
     
